@@ -873,7 +873,9 @@ export async function subscribeInstagramAccountToWebhooks(
         Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
-        subscribed_fields: ["comments", "messages"],
+        // messaging_postbacks carries opening-DM button taps; without it the
+        // tap never reaches the webhook and the link is never sent.
+        subscribed_fields: ["comments", "messages", "messaging_postbacks", "messaging_seen"],
       }),
     }
   );
